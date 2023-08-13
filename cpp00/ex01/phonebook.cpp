@@ -6,7 +6,7 @@
 /*   By: kalshaer <kalshaer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 14:25:21 by kalshaer          #+#    #+#             */
-/*   Updated: 2023/08/13 00:33:27 by kalshaer         ###   ########.fr       */
+/*   Updated: 2023/08/13 12:43:34 by kalshaer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,12 @@ void	Phonebook::_display_contact() const
 	int	index;
 	std::cout << "Enter index: ";
 	std::cin >> index;
-	std::cin.ignore();
-	if (index < 1 || index > 8)
-		std::cout << "Invalid index" << std::endl;
+	if (std::cin.fail() || (index < 1 || index > 8))
+	{
+		std::cout << "Invalid input" << std::endl;
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	}
 	else
 	{
 		std::cout << "first_name: " << this->_contacts[index - 1].get_first_name() << std::endl;
@@ -51,6 +54,7 @@ void	Phonebook::_display_contact() const
 		std::cout << "nickname: " << this->_contacts[index - 1].get_nickname() << std::endl;
 		std::cout << "phone_number: " << this->_contacts[index - 1].get_phone_number() << std::endl;
 		std::cout << "darkest_secret: " << this->_contacts[index - 1].get_darkest_secret() << std::endl;
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	}
 }
 
@@ -83,7 +87,9 @@ void	Phonebook::add_contact()
 		std::cout << prompt[i];
 		if (!std::getline(std::cin, var[i]) )
 		{
-			std::cout << std::endl;
+			std::cin.clear();
+			std::cin.ignore();
+			std::cout << std::endl << std::flush;
 			break ;
 		}
 		if (var[i].empty())
