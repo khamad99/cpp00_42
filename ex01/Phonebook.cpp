@@ -6,11 +6,20 @@
 /*   By: kalshaer <kalshaer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 14:25:21 by kalshaer          #+#    #+#             */
-/*   Updated: 2023/08/16 09:36:49 by kalshaer         ###   ########.fr       */
+/*   Updated: 2023/08/16 11:17:28 by kalshaer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Phonebook.hpp"
+
+bool Phonebook::_containsOnlySpaces(const std::string& str) const 
+{
+    for (size_t i = 0; i < str.length(); i++) {
+        if (!std::isspace(str[i]))
+            return false;
+    }
+    return true;
+}
 
 std::string	Phonebook::_display_format(std::string str) const
 {
@@ -71,15 +80,6 @@ void	Phonebook::search_contact() const
 	}
 	std::cout << "----------|----------|----------|----------" << std::endl;
 	Phonebook::_display_contact();
-}
-
-bool Phonebook::_containsOnlySpaces(const std::string& str) const 
-{
-    for (size_t i = 0; i < str.length(); i++) {
-        if (!std::isspace(str[i]))
-            return false;
-    }
-    return true;
 }
 
 void	Phonebook::add_contact()

@@ -6,7 +6,7 @@
 /*   By: kalshaer <kalshaer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 09:07:21 by kalshaer          #+#    #+#             */
-/*   Updated: 2023/08/12 23:27:00 by kalshaer         ###   ########.fr       */
+/*   Updated: 2023/08/16 11:10:32 by kalshaer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,14 @@
 #include <iostream>
 #include <string>
 
-int		main()
+int		main(int argc, char **argv)
 {
 	Phonebook	phonebook;
 	std::string	command;
+
+	(void)argv;
+	if (argc != 1)
+		return (std::cout << "Only ./phonebook is allowed" << std::endl, 1);
 
 	while (command != "EXIT")
 	{
