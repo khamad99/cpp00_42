@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   phonebook.cpp                                      :+:      :+:    :+:   */
+/*   Phonebook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kalshaer <kalshaer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 14:25:21 by kalshaer          #+#    #+#             */
-/*   Updated: 2023/08/13 12:43:34 by kalshaer         ###   ########.fr       */
+/*   Updated: 2023/08/16 09:36:49 by kalshaer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Phonebook.hpp"
-#include <iomanip>
 
 std::string	Phonebook::_display_format(std::string str) const
 {
@@ -74,6 +73,15 @@ void	Phonebook::search_contact() const
 	Phonebook::_display_contact();
 }
 
+bool Phonebook::_containsOnlySpaces(const std::string& str) const 
+{
+    for (size_t i = 0; i < str.length(); i++) {
+        if (!std::isspace(str[i]))
+            return false;
+    }
+    return true;
+}
+
 void	Phonebook::add_contact()
 {
 	int i = -1;
@@ -92,7 +100,7 @@ void	Phonebook::add_contact()
 			std::cout << std::endl << std::flush;
 			break ;
 		}
-		if (var[i].empty())
+		if (var[i].empty() || Phonebook::_containsOnlySpaces(var[i]))
 		{
 			i--;
 			continue ;
